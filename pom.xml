@@ -25,7 +25,12 @@
 	</properties>
 
 	<dependencies>
-		
+		<!--  Java source code formatter -->
+		<dependency>
+		  <groupId>com.google.googlejavaformat</groupId>
+		  <artifactId>google-java-format</artifactId>
+		  <version>1.5</version>
+		</dependency>
 		<!-- Template engine -->
 		<dependency>
 		  <groupId>de.neuland-bfi</groupId>
