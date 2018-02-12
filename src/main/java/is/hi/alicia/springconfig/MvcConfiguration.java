@@ -1,15 +1,16 @@
-package is.hi.springconfig;
+package is.hi.alicia.springconfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import de.neuland.jade4j.JadeConfiguration;
 import de.neuland.jade4j.spring.template.SpringTemplateLoader;
 import de.neuland.jade4j.spring.view.JadeViewResolver;
 
 @Configuration
-public class JadeConfig {
+public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public SpringTemplateLoader templateLoader() {
