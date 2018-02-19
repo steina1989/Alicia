@@ -22,3 +22,7 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+### JS things
+node_modules/
+src/main/resources/static/built/
