@@ -1,5 +1,6 @@
 package is.hi.alicia.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -19,8 +20,7 @@ public class Question {
 	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 	private String text;
 	
-	
 	@OneToMany(mappedBy="question")
-	private List<Answer> answers;
+	private List<Answer> answers = 	new ArrayList<Answer>();	
 
 }
