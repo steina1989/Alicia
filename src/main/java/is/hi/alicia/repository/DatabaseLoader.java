@@ -6,44 +6,38 @@ import org.springframework.stereotype.Component;
 
 import is.hi.alicia.model.Assignment;
 import is.hi.alicia.model.Course;
-import is.hi.alicia.model.Student;
+import is.hi.alicia.model.User;
 
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
 	private final AssignmentRepository assignmentRepository;
 	private final CourseRepository courseRep;
-	private final StudentRepository studentRep;
+	private final UserRepository userRep;
 
 	@Autowired
-	public DatabaseLoader(AssignmentRepository repository, CourseRepository courseRep, StudentRepository studentRep) {
+	public DatabaseLoader(AssignmentRepository repository, CourseRepository courseRep, UserRepository userRep) {
 		this.assignmentRepository = repository;
 		this.courseRep = courseRep;
-		this.studentRep = studentRep;
+		this.userRep = userRep;
 	}
 
 	@Override
 	public void run(String... strings) throws Exception {
+
+		User user = new User();
+		user.setName("Hallgrímur Davíð");
+		userRep.save(user);
+		
+		User user2 = new User();
+		user2.setName("Steina Dögg");
+		userRep.save(user2);
+		
 		Course course = new Course();
 		course.setName("Tölvunarfræði 1");
-		this.courseRep.save(course);
-
-		Assignment as = new Assignment();
-		as.setName("Verkefni 1");
-		as.setCourse(course);
-		// Course fær ekki verkefni 1 inn..
-		//course.addAssignment(as);
-
-		Student student = new Student();
-		student.setName("Hallgrímur Davíð");
-		
-		course.addStudent(student);
+		courseRep.save(course);
 		
 		
-		this.assignmentRepository.save(as);
-		this.studentRep.save(student);
-		this.courseRep.save(course);
-
 
 	}
 }

@@ -14,8 +14,6 @@ public class RestConfig extends RepositoryRestConfigurerAdapter {
         config.exposeIdsFor(Answer.class);
         config.exposeIdsFor(Assignment.class);
         config.exposeIdsFor(Course.class);
-        config.exposeIdsFor(Question.class);
-        config.exposeIdsFor(Student.class);
-        config.exposeIdsFor(Teacher.class);
+        config.exposeIdsFor(User.class);
     }
 }

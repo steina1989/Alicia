@@ -6,13 +6,10 @@ import org.springframework.ui.ModelMap;
 
 
 @Controller
-@RequestMapping("/")
 public class MainController {
 
-	@RequestMapping("/login")
+	@RequestMapping("/")
 	public String getRoot(ModelMap model) {
-		System.out.println("in /login handler");
-		model.addAttribute("name","steina");
 		return "index";
 	}
 }

@@ -1,6 +1,9 @@
 package is.hi.alicia.model;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,31 +25,25 @@ import lombok.Data;
 @Entity
 public class Course {
 
+
 	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 	private String name;
 		
 	@ManyToMany
-	@JoinColumn(name="teacher_id")
-	private List<Teacher> teachers = new ArrayList<Teacher>();	
+	@JoinColumn(name="user_id")
+	private Set<User> users = new HashSet<User>();	
+	
+	@OneToMany
+	@JoinColumn(name="assignment_id")
+	private Set<Assignment> assignments = new HashSet<Assignment>();
+	
+	public void addUser(User user) {
+		this.users.add(user);
+	}
 
-	@ManyToMany
-	@JoinColumn(name="student_id")
-	private List<Student> students =  new ArrayList<Student>();	
-	
-	@OneToMany(mappedBy="course")
-	private List<Assignment> assignments = new ArrayList<Assignment>();	
-	
-	
-	public void addStudent(Student student) {
-		this.students.add(student);
-	}
-	
-	public void addTecher(Teacher teacher) {
-		this.teachers.add(teacher);
-	}
-	
 	public void addAssignment(Assignment assignment) {
 		this.assignments.add(assignment);
+
 	}
 
 

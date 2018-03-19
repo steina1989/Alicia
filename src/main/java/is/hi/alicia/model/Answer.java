@@ -17,12 +17,12 @@ public class Answer {
 	private int distance;
 	
 	@ManyToOne
-    @JoinColumn(name="question_id")
-	private Question question;
+    @JoinColumn(name="assignment_id")
+	private Assignment assignment;
 	
     @ManyToOne
     @JoinColumn(name="user_id")
-	private Teacher user;
+	private User user;
 	
 
 }

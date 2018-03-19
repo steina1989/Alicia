@@ -1,5 +1,7 @@
 package is.hi.alicia.diff;
 
+import java.io.IOException;
+
 /**
  * 
  * @author Steina Dogg Vigfusdottir sdv6@hi.is
@@ -9,9 +11,9 @@ package is.hi.alicia.diff;
  * Implementations of this interface are used to generate a "difference" between
  * two source codes.
  * 
- * Conform to it to implement different algorithms.
+ * Conform to it to implement different algorithms for Alicia.
  */
-public interface CompareSourceCode {
+interface CompareSourceCode {
 	
-	int calculateDistance(String a, String b);
+	public <T> int calculateDistance(T a, T b) throws IOException;
 }
