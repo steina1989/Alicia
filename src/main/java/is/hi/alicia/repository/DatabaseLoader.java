@@ -1,5 +1,7 @@
 package is.hi.alicia.repository;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -35,9 +37,27 @@ public class DatabaseLoader implements CommandLineRunner {
 		
 		Course course = new Course();
 		course.setName("Tölvunarfræði 1");
+		
+		Assignment assignment = new Assignment();
+		assignment.setName("Verkefni 1");
+		assignment.setReturnDate(new Date());
+		assignment.setQuestionDescription(
+				"#Verkefni 1 - Inngangur að java.\n"
+				+ "Svaka skemmtileg verkefnislýsing.\n"
+				+ "Til að keyra: "
+				+ "```\n" + 
+				"javac verkefni1.java \n" + 
+				"\n" + 
+				"// og\n" + 
+				"\n" + 
+				"java verkefni1 \n" + 
+				"```");
+		
+		
+		assignmentRepository.save(assignment);
+		course.addAssignment(assignment);
+		
 		courseRep.save(course);
-		
-		
 
 	}
 }
