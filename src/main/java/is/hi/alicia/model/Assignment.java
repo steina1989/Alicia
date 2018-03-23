@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +24,7 @@ public class Assignment  {
 	
 	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 	private String name;
+	@Column(columnDefinition = "TEXT")
 	private String questionDescription;
 
 	@ManyToOne

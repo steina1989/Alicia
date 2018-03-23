@@ -36,22 +36,37 @@ public class DatabaseLoader implements CommandLineRunner {
 		userRep.save(user2);
 		
 		Course course = new Course();
-		course.setName("Tölvunarfræði 1");
+		course.setName("Tölvunarfræði 1 (hefur eitt verkefni)");
+		
+		Course course2 = new Course();
+		course2.setName("Tölvunarfræði 2 (engin verkefni)");
+		courseRep.save(course2);
 		
 		Assignment assignment = new Assignment();
 		assignment.setName("Verkefni 1");
 		assignment.setReturnDate(new Date());
 		assignment.setQuestionDescription(
-				"#Verkefni 1 - Inngangur að java.\n"
-				+ "Svaka skemmtileg verkefnislýsing.\n"
-				+ "Til að keyra: "
-				+ "```\n" + 
-				"javac verkefni1.java \n" + 
+				"Inngangur að java forritun\n" + 
+				"============\n" + 
 				"\n" + 
-				"// og\n" + 
+				"Paragraphs are separated by a blank line.\n" + 
 				"\n" + 
-				"java verkefni1 \n" + 
-				"```");
+				"2nd paragraph. *Italic*, **bold**, and `monospace`. Itemized lists\n" + 
+				"look like:\n" + 
+				"\n" + 
+				"  * this one\n" + 
+				"  * that one\n" + 
+				"  * the other one\n" + 
+				"\n" + 
+				"Note that --- not considering the asterisk --- the actual text\n" + 
+				"content starts at 4-columns in.\n" + 
+				"\n" + 
+				"> Block quotes are\n" + 
+				"> written like so.\n" + 
+				">\n" + 
+				"> They can span multiple paragraphs,\n" + 
+				"> if you like.");
+		
 		
 		
 		assignmentRepository.save(assignment);

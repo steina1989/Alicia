@@ -5,12 +5,20 @@ class Grading extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            bla: [],
+            assignment: '',
+
         };
     }
 
     componentDidMount() {
-        console.log(this.props.match.params.id, 'ehóóóóó');
+        const courseId = this.props.match.params.courseId;
+        const assignId = this.props.match.params.assignmentId;
+        fetch(`/api/courses/${courseId}/assignments/${assignId}`)
+            .then(resp => resp.json())
+            .then((res) => {
+                this.setState({ assignment: res });
+                console.log('here here', res);
+            });
     }
 
     render() {
@@ -21,7 +29,7 @@ class Grading extends Component {
                         <div>Upper left</div>
                         <div>
                             <SplitterLayout secondaryInitialSize={300}>
-                                <div>middle</div>
+                                <div>Code</div>
                                 <div>Upper right</div>
                             </SplitterLayout>
                         </div>
@@ -31,6 +39,8 @@ class Grading extends Component {
             </SplitterLayout>
         );
     }
+
+
 }
 
 export default Grading;

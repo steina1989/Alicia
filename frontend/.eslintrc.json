@@ -23,6 +23,7 @@
     "object-shorthand": ["error", "properties", {
       "avoidQuotes": true
     }],
+    "no-underscore-dangle" : 0,
     "func-names": ["off"],
     "no-use-before-define": ["error", "nofunc"],
     "no-return-assign": ["warn"],

@@ -169,6 +169,7 @@ module.exports = function (env) {
          * https://webpack.js.org/configuration/dev-server/
          */
         devServer:{
+            historyApiFallback: true,
             hot: true,
             contentBase: path.join(__dirname, "public"),
             compress: true,

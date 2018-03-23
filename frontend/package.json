@@ -1,8 +1,11 @@
 {
     "name": "frontend",
     "dependencies": {
+        "axios": "^0.18.0",
         "react": "^15.5.4",
         "react-dom": "^15.5.4",
+        "react-markdown": "^3.3.0",
+        "react-router": "^4.2.0",
         "react-router-dom": "^4.2.2",
         "react-splitter-layout": "^3.0.0"
     },
