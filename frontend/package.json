@@ -7,7 +7,8 @@
         "react-markdown": "^3.3.0",
         "react-router": "^4.2.0",
         "react-router-dom": "^4.2.2",
-        "react-splitter-layout": "^3.0.0"
+        "react-splitter-layout": "^3.0.0",
+        "react-syntax-highlighter": "^7.0.2"
     },
     "version": "0.1.0",
     "devDependencies": {

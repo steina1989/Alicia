@@ -44,7 +44,7 @@ class App extends Component {
                 <Header courseHandler={this.selectCoursesHandler} />
                 <Route exact path="/" render={() => <h2> Velkomin </h2>} />
                 <Route path="/about" render={() => <p>Um Verkefnið </p>} />
-                <Route path="/grader/:courseId/:assignmentId" component={Grader} />
+                <Route path="/grader/:assignmentId/" component={Grader} />
                 <Route
                     path="/assignments"
                     render={() => (

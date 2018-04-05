@@ -13,6 +13,6 @@ import com.google.googlejavaformat.java.FormatterException;
  */
 interface Beautifier {
 	
-	String beautify(String sourcecode) throws FormatterException ;
+	public String beautify(String sourcecode) throws FormatterException ;
 	
 }

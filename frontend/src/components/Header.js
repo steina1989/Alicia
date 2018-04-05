@@ -15,7 +15,10 @@ const Header = props => (
                         <Link to="/about">About</Link>
                     </li>
                     <li>
-                        <Link to="/course" onClick={props.courseHandler} >Courses</Link>
+                        <Link to="/course" onClick={props.courseHandler}>Courses</Link>
+                    </li>
+                    <li>
+                        <Link to="/grader/1" onClick={props.courseHandler}>Grading</Link>
                     </li>
                 </ul>
             </nav>

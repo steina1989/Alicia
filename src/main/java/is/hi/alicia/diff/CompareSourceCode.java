@@ -15,5 +15,5 @@ import java.io.IOException;
  */
 interface CompareSourceCode {
 	
-	public <T> int calculateDistance(T a, T b) throws IOException;
+	public int calculateDistance(String a, String b) throws IOException;
 }

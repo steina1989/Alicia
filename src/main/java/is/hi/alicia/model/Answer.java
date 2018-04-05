@@ -1,5 +1,6 @@
 package is.hi.alicia.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,7 @@ import lombok.Data;
 public class Answer {
 	
 	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+	@Column(columnDefinition = "TEXT")
 	private String sourceCode;
 	private int distance;
 	
@@ -23,6 +25,8 @@ public class Answer {
     @ManyToOne
     @JoinColumn(name="user_id")
 	private User user;
+    
+    private boolean marked;	
 	
 
 }

@@ -1,8 +1,11 @@
 package is.hi.alicia.diff;
 
+/**
+ * 
+ */
+
 import java.io.File;
 import java.io.IOException;
-
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteException;
@@ -14,7 +17,7 @@ import org.springframework.util.StringUtils;
 public class TextualCompare implements CompareSourceCode {
 
 	@Override
-	public <E> int calculateDistance(E a, E b) throws IOException   {
+	public int calculateDistance(String a, String b) throws IOException   {
 		
 		DefaultExecutor exec = new DefaultExecutor();
 	    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

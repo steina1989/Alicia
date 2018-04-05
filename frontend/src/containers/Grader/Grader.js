@@ -1,42 +1,66 @@
 import React, { Component } from 'react';
 import SplitterLayout from 'react-splitter-layout';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { foundation } from 'react-syntax-highlighter/styles/hljs';
 
 class Grading extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            assignment: '',
-
+            code: '',
+            index: 0,
+            answers: null,
         };
     }
 
+    handleKeyPress = (evt) => {
+        evt.preventDefault();
+        if (evt.key === 'ArrowRight' || evt.key === 'ArrowLeft') {
+            const delta = evt.key === 'ArrowRight' ? 1 : -1;
+            let newIndex = this.state.index + delta;
+            // Roll back if out of range.
+            if (newIndex < 0 || newIndex >= this.state.answers.length) {
+                newIndex = this.state.index;
+                return;
+            }
+            const code = this.state.answers[newIndex].sourceCode;
+            this.setState({ index: newIndex, code });
+        }
+    }
+
     componentDidMount() {
-        const courseId = this.props.match.params.courseId;
         const assignId = this.props.match.params.assignmentId;
-        fetch(`/api/courses/${courseId}/assignments/${assignId}`)
+        fetch(`/api/assignments/${assignId}/answers`)
             .then(resp => resp.json())
             .then((res) => {
-                this.setState({ assignment: res });
-                console.log('here here', res);
+                this.setState({ answers: res._embedded.answers });
+                const code = res._embedded.answers[this.state.index].sourceCode;
+                this.setState({ code });
             });
     }
 
+
     render() {
         return (
-            <SplitterLayout vertical percentage secondaryInitialSize={30}>
-                <div>
-                    <SplitterLayout percentage primaryIndex={1} secondaryInitialSize={20}>
-                        <div>Upper left</div>
-                        <div>
-                            <SplitterLayout secondaryInitialSize={300}>
-                                <div>Code</div>
-                                <div>Upper right</div>
-                            </SplitterLayout>
-                        </div>
-                    </SplitterLayout>
-                </div>
-                <div>Command line Pane</div>
-            </SplitterLayout>
+            <div onKeyDown={this.handleKeyPress} tabIndex="0">
+                <SplitterLayout vertical percentage secondaryInitialSize={30}>
+                    <div>
+                        <SplitterLayout percentage primaryIndex={1} secondaryInitialSize={20}>
+                            <div>Upper left</div>
+                            <div>
+                                <SplitterLayout secondaryInitialSize={300}>
+                                    <SyntaxHighlighter
+                                        language="java"
+                                        style={foundation}>{this.state.code}
+                                    </SyntaxHighlighter>
+                                    <div>Upper right</div>
+                                </SplitterLayout>
+                            </div>
+                        </SplitterLayout>
+                    </div>
+                    <div>Command line Pane</div>
+                </SplitterLayout>
+            </div>
         );
     }
 

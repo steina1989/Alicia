@@ -1,11 +1,23 @@
 package is.hi.alicia.repository;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.IOFileFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import is.hi.alicia.beautifier.JavaBeautifier;
+import is.hi.alicia.diff.GoogleDiff;
+import is.hi.alicia.model.Answer;
 import is.hi.alicia.model.Assignment;
 import is.hi.alicia.model.Course;
 import is.hi.alicia.model.User;
@@ -16,12 +28,14 @@ public class DatabaseLoader implements CommandLineRunner {
 	private final AssignmentRepository assignmentRepository;
 	private final CourseRepository courseRep;
 	private final UserRepository userRep;
+	private final AnswerRepository answerRep;
 
 	@Autowired
-	public DatabaseLoader(AssignmentRepository repository, CourseRepository courseRep, UserRepository userRep) {
+	public DatabaseLoader(AssignmentRepository repository, CourseRepository courseRep, UserRepository userRep, AnswerRepository answerRep) {
 		this.assignmentRepository = repository;
 		this.courseRep = courseRep;
 		this.userRep = userRep;
+		this.answerRep = answerRep;
 	}
 
 	@Override
@@ -45,33 +59,54 @@ public class DatabaseLoader implements CommandLineRunner {
 		Assignment assignment = new Assignment();
 		assignment.setName("Verkefni 1");
 		assignment.setReturnDate(new Date());
-		assignment.setQuestionDescription(
-				"Inngangur að java forritun\n" + 
-				"============\n" + 
+		assignment.setQuestionDescription("# Verkefni 5\n" + 
 				"\n" + 
-				"Paragraphs are separated by a blank line.\n" + 
+				"Skrifið Java forritið VixlaPorum.java sem fær á skipanalínunni N bókstafi og skrifar þá út þannig að hliðstæðum\n" + 
+				"stökum hefur verið víxlað. \n" + 
 				"\n" + 
-				"2nd paragraph. *Italic*, **bold**, and `monospace`. Itemized lists\n" + 
-				"look like:\n" + 
+				"Til dæmis ef stafirnir á skipanalínunni eru A B C D E, þá skrifar forritið út B A D C\n" + 
+				"E. \n" + 
 				"\n" + 
-				"  * this one\n" + 
-				"  * that one\n" + 
-				"  * the other one\n" + 
+				"Það víxlar fyrstu tveimur stöfunum og næstu tveimur, en þar sem fjöldinn er oddatala þá er síðasti stafurinn\n" + 
+				"óbreyttur.\n" + 
 				"\n" + 
-				"Note that --- not considering the asterisk --- the actual text\n" + 
-				"content starts at 4-columns in.\n" + 
-				"\n" + 
-				"> Block quotes are\n" + 
-				"> written like so.\n" + 
-				">\n" + 
-				"> They can span multiple paragraphs,\n" + 
-				"> if you like.");
+				"");
 		
+		JavaBeautifier jb = new JavaBeautifier();
+		File teachersolution = new File("src/main/resources/demosolutions/Lausn.java");
+		String teachersol = "";
+		try {
+			teachersol = FileUtils.readFileToString(teachersolution);
+			assignment.setTeacherSolution(jb.beautify(teachersol));
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-		
+		GoogleDiff gd = new GoogleDiff();
+
+		File f = new File("src/main/resources/demosolutions");
+		String [] extension = new String[] {"java"};
+		Iterator<File> it = FileUtils.iterateFiles(f, extension, false);
+		List<Answer> answerList= new ArrayList<Answer>();
+
+		while (it.hasNext()) {
+			try {
+				String answer = jb.beautify(FileUtils.readFileToString(it.next()));
+				Answer ans = new Answer();
+				ans.setSourceCode(answer);
+				ans.setDistance(gd.calculateDistance(teachersol, answer));
+				answerRep.save(ans);
+				answerList.add(ans);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		assignment.setAnswers(answerList);
+		System.out.println("Number of assignments::::: " + assignment.getAnswers().size() );
 		assignmentRepository.save(assignment);
 		course.addAssignment(assignment);
-		
 		courseRep.save(course);
 
 	}
