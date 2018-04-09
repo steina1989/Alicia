@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Header from './components/Header';
 import Grader from './containers/Grader/Grader';
@@ -42,25 +42,27 @@ class App extends Component {
         return (
             <div>
                 <Header courseHandler={this.selectCoursesHandler} />
-                <Route exact path="/" render={() => <h2> Velkomin </h2>} />
-                <Route path="/about" render={() => <p>Um Verkefnið </p>} />
-                <Route path="/grader/:assignmentId/" component={Grader} />
-                <Route
-                    path="/assignments"
-                    render={() => (
-                        <AssignmentTable
-                            assignments={this.state.assignments}
-                            openAssignmentHandler={this.openAssignmentHandler}
-                            courseId={this.state.courseId} />)} />
-                <Route
-                    path="/course"
-                    render={() => (
-                        <CourseTable
-                            courses={this.state.courses}
-                            openCourseHandler={this.openCourseHandler} />)} />
-                <Route
-                    path="/createAssignment/:courseId"
-                    component={CreateAssignment} />
+                <Switch>
+                    <Route exact path="/" render={() => <h2> Velkomin </h2>} />
+                    <Route path="/about" render={() => <p>Um Verkefnið </p>} />
+                    <Route path="/grader/:assignmentId/" component={Grader} />
+                    <Route
+                        path="/assignments"
+                        render={() => (
+                            <AssignmentTable
+                                assignments={this.state.assignments}
+                                openAssignmentHandler={this.openAssignmentHandler}
+                                courseId={this.state.courseId} />)} />
+                    <Route
+                        path="/course"
+                        render={() => (
+                            <CourseTable
+                                courses={this.state.courses}
+                                openCourseHandler={this.openCourseHandler} />)} />
+                    <Route
+                        path="/createAssignment/:courseId"
+                        component={CreateAssignment} />
+                </Switch>
             </div>
         );
     }

@@ -20,7 +20,7 @@ localhost:8080/api
 
 For front end development, open another terminal in the root directory. 
 ```
-cd frontend/
+cd front/
 npm install
 npm start
 ```

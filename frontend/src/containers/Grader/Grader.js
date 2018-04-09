@@ -14,7 +14,6 @@ class Grading extends Component {
     }
 
     handleKeyPress = (evt) => {
-        evt.preventDefault();
         if (evt.key === 'ArrowRight' || evt.key === 'ArrowLeft') {
             const delta = evt.key === 'ArrowRight' ? 1 : -1;
             let newIndex = this.state.index + delta;
