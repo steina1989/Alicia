@@ -1,3 +1,4 @@
+
 package is.hi.alicia.springconfig;
 
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,7 @@ public class RestConfig extends RepositoryRestConfigurerAdapter {
 
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+    	config.setBasePath("/api");
         config.exposeIdsFor(Answer.class);
         config.exposeIdsFor(Assignment.class);
         config.exposeIdsFor(Course.class);

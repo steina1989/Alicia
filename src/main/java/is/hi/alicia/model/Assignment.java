@@ -2,7 +2,11 @@ package is.hi.alicia.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,32 +21,74 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
-@Data
+//@Data
 @Entity
 public class Assignment  {
 	
-	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
-	private String name;
-	@Column(columnDefinition = "TEXT")
+	private Long id;
+	private String title;
 	private String questionDescription;
-	
-	@Column(columnDefinition = "TEXT")
-	@JsonIgnore
 	private String teacherSolution;
-
-	@ManyToOne
-	@JoinColumn(name="course_id")
+	private Set<Answer> answers = new HashSet<>();
 	private Course course;
-	private Date returnDate;
+
 	
-	@OneToMany
-	@JoinColumn(name="answer_id")
-	@OrderBy(clause = "distance")
-	private List<Answer> answers = new ArrayList<Answer>();
-		
-	public void addAnswer(Answer answer) {
-		this.answers.add(answer);
+    @Id  
+    @GeneratedValue(strategy=GenerationType.IDENTITY)  
+	public Long getId() {
+		return id;
 	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	@Column(columnDefinition = "TEXT")
+	public String getQuestionDescription() {
+		return questionDescription;
+	}
+
+	public void setQuestionDescription(String questionDescription) {
+		this.questionDescription = questionDescription;
+	}
+	@Column(columnDefinition = "TEXT")
+	public String getTeacherSolution() {
+		return teacherSolution;
+	}
+
+	public void setTeacherSolution(String teacherSolution) {
+		this.teacherSolution = teacherSolution;
+	}
+	
+	@OneToMany(cascade=CascadeType.ALL)  
+    @JoinColumn(name="assignment_answer")
+	public Set<Answer> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(Set<Answer> answers) {
+		this.answers = answers;
+	}
+
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="course_assignment")
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+	
+	
+	
 	
 	
 }
