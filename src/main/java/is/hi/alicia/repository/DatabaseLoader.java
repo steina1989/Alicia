@@ -22,8 +22,6 @@ import is.hi.alicia.diff.GoogleDiff;
 import is.hi.alicia.model.Answer;
 import is.hi.alicia.model.Assignment;
 import is.hi.alicia.model.Course;
-import is.hi.alicia.model.Employee;
-import is.hi.alicia.model.Employer;
 import is.hi.alicia.model.User;
 
 @Component
