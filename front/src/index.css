@@ -16,15 +16,20 @@ html {
 body {
   overflow-y: scroll;
   font-size: 16px;
-  font-family: 'Noto sans', sans-serif;
+  font-family: 'Lora', serif;
+  background-color: #eee;
+  line-height: 30px;
 }
 
 h1,
 h2,
 h3 {
-  font-family: 'Noto serif', serif;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  color: #333;
+  line-height: 30px;
+  font-family: 'Roboto', serif;
 }
-
 a {
   text-decoration: underline;
   color: #000;

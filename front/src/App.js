@@ -1,70 +1,37 @@
 import React, { Component } from 'react';
-import Header from './Header/Header';
-import Grader from './containers/Grader/Grader';
-import { CourseTable, AssignmentTable } from './containers/Tables/Tables';
-import CreateAssignment from './containers/CreateAssignment';
-
+import Header from './header';
+import Home from './routes/home';
+import Course from './routes/course';
+import Courses from './routes/courses';
+import Grader from './routes/grader';
+import NotFound from './routes/not-found';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
-  state = {
-    loading: false,
-    courses: [],
-    assignments: [],
-    courseId: null
-  };
-
-  selectCoursesHandler = () => {
-    const api = process.env.REACT_APP_SERVICE_URL;
-    console.log(`${api}/courses`);
-    fetch(`${api}/courses`)
-      .then(resp => resp.json())
-      .then(res => {
-        const courses = res._embedded.courses;
-        this.setState({ courses });
-      });
-  };
-
   render() {
-    console.log('courses:', this.state.courses);
     return (
-      <div>
+      <div className="main">
         <Header />
-        <Switch>
-          <Route exact path="/" render={Home} />
-          <Route path="/about" render={About} />
-          <Route path="/grader/:assignmentId/" component={Grader} />
-          <Route
-            path="/assignments"
-            render={() => (
-              <AssignmentTable
-                assignments={this.state.assignments}
-                openAssignmentHandler={this.openAssignmentHandler}
-                courseId={this.state.courseId}
-              />
-            )}
-          />
-          {/* <Route
-          path="/course/:courseId"
-          component={Course}
-          /> */}
-          <Route
-            path="/createAssignment/:courseId"
-            component={CreateAssignment}
-          />
-        </Switch>
+        <div className="App">
+          <Switch>
+            <Route exact path="/" component={Home} />
+            {/* Cards of Courses */}
+            <Route path="/courses/" component={Courses} />
+            {/* List of assignments for specific course */}
+            <Route path="/course/:id" component={Course} />
+            {/* Assignment's content and post form */}
+            <Route path="/assignment/:id" component={Courses} />
+
+            {/* Grading system for an assignment */}
+            <Route path="/grader/:assignmentId/" component={Grader} />
+
+            <Route component={NotFound} />
+          </Switch>
+        </div>
       </div>
     );
   }
 }
-
-const About = () => {
-  return <div className="App">Um Verkefnið</div>;
-};
-
-const Home = () => {
-  return <div className="App">Heim</div>;
-};
 
 export default App;
