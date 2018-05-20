@@ -8,10 +8,9 @@ import is.hi.alicia.model.Answer;
 
 
 public interface AnswerRepository extends CrudRepository<Answer, Long>{
-	@RestResource(rel="nextUnmarkedByCourseId",path="nextUnmarkedByCourseId")
+	@RestResource(rel="nextUnmarkedByAssignmentId",path="nextUnmarkedByAssignmentId")
     List<Answer> findFirstByAssignmentIdAndMarkedFalseOrderByDistanceAsc(@Param(value = "id") long id);
 	
-	@RestResource(rel="nextByCourseId",path="nextByCourseId")
-    List<Answer> findFirstByAssignmentIdOrderByDistanceAsc(@Param(value = "id") long id);	
-	
+	@RestResource(rel="nextByAssignmentId",path="nextByAssignmentId")
+    List<Answer> findFirstByAssignmentIdOrderByDistanceAsc(@Param(value = "id") long id);		
 }

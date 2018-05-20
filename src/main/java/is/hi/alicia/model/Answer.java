@@ -77,6 +77,7 @@ public class Answer {
 	public void setMarked(boolean marked) {
 		this.marked = marked;
 	}
+	@Column(columnDefinition = "TEXT")
 	public String getFormatterDiagnostics() {
 		return formatterDiagnostics;
 	}

@@ -2,6 +2,7 @@ package is.hi.alicia.repository;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -129,15 +130,24 @@ public class DatabaseLoader implements CommandLineRunner {
 		assignment.setTeacherSolution(
 				jb.beautify(FileUtils.readFileToString(new File("src/main/resources/demosolutions/Lausn.java"))));
 
-		assignment.setQuestionDescription("Question description");
+		assignment.setQuestionDescription("## Verkefni 1\n" + 
+				" \n" + 
+				"Skrifið Java forritið VixlaPorum.java sem fær á skipanalínunni N bókstafi og skrifar þá út þannig að hliðstæðum stökum hefur verið víxlað.\n" + 
+				"\n" + 
+				"Til dæmis ef stafirnir á skipanalínunni eru A B C D E, þá skrifar forritið út B A D C E.\n" + 
+				"\n" + 
+				"Það víxlar fyrstu tveimur stöfunum og næstu tveimur, en þar sem fjöldinn er oddatala þá er síðasti stafurinn óbreyttur.");
 
 		assignment.setTitle("Verkefni 1");
+		
+		
 
 		Course course = new Course();
 		course.getAssignments().add(assignment);
 		course.setName("Tölvunarfræði 1");
 		course.setIdentifier("TÖL101");
 		assignment.setCourse(course);
+		assignment.setReturnDate(LocalDate.now().plusDays(5).atTime(23, 59).toString());
 
 		user.getCourses().add(course);
 		course.getUsers().add(user);

@@ -28,7 +28,24 @@ async function post(data, endpoint, method = 'POST') {
   return { result, status: response.status };
 }
 
+async function addAssignment(assignmentId, file) {
+  const url = `/api/addAnswer/${assignmentId}`;
+  const formData = new FormData();
+  formData.append('uploadedFile', file);
+  const config = {
+    method: 'POST',
+    body: formData
+  };
+  try {
+    const result = await fetch(url, config);
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export default {
   get,
-  post
+  post,
+  addAssignment
 };

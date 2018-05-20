@@ -1,6 +1,4 @@
-.Grader {
+.grader {
   width: 100%;
-  max-width: none;
-  margin: 0 auto;
-  padding: 10px;
+  height: 100%;
 }

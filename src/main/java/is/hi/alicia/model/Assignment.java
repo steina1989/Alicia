@@ -1,5 +1,6 @@
 package is.hi.alicia.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -31,6 +32,7 @@ public class Assignment  {
 	private String teacherSolution;
 	private Set<Answer> answers = new HashSet<>();
 	private Course course;
+	private String returnDate;
 
 	
     @Id  
@@ -41,6 +43,14 @@ public class Assignment  {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getReturnDate() {
+		return returnDate;
+	}
+
+	public void setReturnDate(String string) {
+		this.returnDate = string;
 	}
 
 	public String getTitle() {
@@ -86,6 +96,8 @@ public class Assignment  {
 	public void setCourse(Course course) {
 		this.course = course;
 	}
+
+
 	
 	
 	

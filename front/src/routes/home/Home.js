@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 export default class Home extends PureComponent {
   render() {
     return (
-      <div>
+      <div className="App">
         <h1>Velkomin</h1>
         <h2>
           Alicia er vefkerfi sem leyfir innsendingu verkefna nemenda og yfirferð

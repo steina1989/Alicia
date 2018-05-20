@@ -5,26 +5,26 @@ import Course from './routes/course';
 import Courses from './routes/courses';
 import Grader from './routes/grader';
 import NotFound from './routes/not-found';
+import NewCourse from './routes/newcourse';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="main">
+      <div>
         <Header />
-        <div className="App">
+        <div>
           <Switch>
             <Route exact path="/" component={Home} />
             {/* Cards of Courses */}
-            <Route path="/courses/" component={Courses} />
-            {/* List of assignments for specific course */}
+            <Route exact path="/courses/" component={Courses} />
+            <Route exact path="/courses/new" component={NewCourse} />
+            {/* Expandable list of assignments for specific course. 
+                Extended rows contains forms for submission. */}
             <Route path="/course/:id" component={Course} />
-            {/* Assignment's content and post form */}
-            <Route path="/assignment/:id" component={Courses} />
-
             {/* Grading system for an assignment */}
-            <Route path="/grader/:assignmentId/" component={Grader} />
+            <Route path="/grade/:assignmentId/" component={Grader} />
 
             <Route component={NotFound} />
           </Switch>
